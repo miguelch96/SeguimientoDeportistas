@@ -1,0 +1,52 @@
+﻿
+
+@{
+    ViewBag.Title = "Login";
+}
+<div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+        <div class="container">
+            @using (Html.BeginForm("Login", "Home", FormMethod.Post))
+            {
+                <fieldset>
+                    <legend>Login</legend>
+
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    @if (@ViewBag.Message != null)
+                    {
+                        <div style="border: 1px solid red">
+                            @ViewBag.Message
+                        </div>
+                    }
+                    <table>
+                        <tr style="text-align">
+                            @*<td>@Html.LabelFor(a => a.user.username)</td>
+                            <td>@Html.TextBoxFor(a => a.user.username)</td>
+                            <td>@Html.ValidationMessageFor(a => a.user.username)</td>*@
+                        </tr>
+                        <tr style="text-align">
+                            @*<td>
+                                @Html.LabelFor(a => a.user.password)
+                            </td>
+                            <td>
+                                @Html.PasswordFor(a => a.user.password)
+                            </td>
+                            <td>
+                                @Html.ValidationMessageFor(a => a.user.password)
+                            </td>*@
+                        </tr>
+                        <tr style="text-align">
+                            <td></td>
+                            <td>
+                                <input type="submit" value="Login" />
+                            </td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </fieldset>
+            }
+            </div>
+        </div>
+    </div>

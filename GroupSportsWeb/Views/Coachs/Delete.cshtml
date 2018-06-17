@@ -1,0 +1,141 @@
+﻿@model GroupSportsWeb.ViewModels.DeleteCoachViewModel
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+<div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+        <div class="container">
+            <h3>¿Estás seguro de que deseas borrarlo?</h3>
+            <div>
+                <h4>CoachDTO</h4>
+                <hr />
+                <dl class="dl-horizontal">
+                    <dt>
+                        <label>Usuario</label>
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.username)
+                    </dd>
+
+                    <dt>
+                        <label>Contraseña</label>
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.password)
+                    </dd>
+
+                    <dt>
+                        <label>Tipo de usuario</label>
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.user_type)
+                    </dd>
+
+                    <dt>
+                        <label>Nombres</label>
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.firstName)
+                    </dd>
+
+                    <dt>
+                        <label>Apellidos</label>
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.lastName)
+                    </dd>
+
+                    <dt>
+                        <label>Celular</label>
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.cellPhone)
+                    </dd>
+
+                    <dt>
+                        <label>Dirección</label>
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.address)
+                    </dd>
+
+                    <dt>
+                        <label>Email</label>
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.emailAddress)
+                    </dd>
+
+                    <dt>
+                        <label>Edad</label>
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.edad)
+                    </dd>
+
+                    <dt>
+                        <label>Años de experiencia</label>
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.yearsOfExperience)
+                    </dd>
+
+                    <dt>
+                        <label>ID del usuario</label>
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.userId)
+                    </dd>
+
+                </dl>
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Eliminar</button>
+                    <div class="modal fade" id="myModal" role="dialog">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+
+                                    <h4 class="modal-title">Eliminar</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>¿Está seguro de que desea eliminar el elemento?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="submit" value="Eliminar" class="btn btn-default" />
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    @Html.ActionLink("Regresar", "Index")
+                </div>
+                }
+            </div>
+            </div>
+        </div>
+    </div>
