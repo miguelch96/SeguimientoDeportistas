@@ -1,0 +1,92 @@
+﻿@model GroupSportsWeb.ViewModels.WorkPlans.LstWorkPlanViewModel
+
+@{
+    ViewBag.Title = "title";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Work Plans</h2>
+
+<div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="page-title-box">
+                        <h4 class="page-title">Work Plans </h4>
+                        <ol class="breadcrumb p-0 m-0">
+                            <li>
+                                <a href="#">Macrociclos</a>
+                            </li>
+                            <li>
+                                <a href="#">Mesociclos </a>
+                            </li>
+                            <li class="active">
+                                Semanas
+                            </li>
+                        </ol>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card-box">
+                        <div class="table-rep-plugin">
+                            <div class="table-responsive" data-pattern="priority-columns">
+                                <table id="tech-companies-1" class="table  table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th data-priority="1">Nombre</th>
+                                            <th data-priority="1">Objetivo</th>
+                                            <th data-priority="1">Fecha de Inicio</th>
+                                            <th data-priority="1">Fecha de Fin</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.LstWorkplans)
+                                        {
+                                        <tr>
+                                            <td>
+                                                <a href="@Url.Action("ByWorkPlan","Macrociclos",new { workplanid = item.WorkPlanId, @class="on-default edit-row"})">@item.Name</a>
+                                            </td>
+                                            <td>@item.Objective</td>
+                                            <td>@item.FechaInicio</td>
+                                            <td>@item.FechaFin</td>
+                                            <td class="actions">
+                                                @*<a href="@Url.Action("AddEditWorkplan",new { workplanId = item.WorkPlanId, @class="hidden on-editing save-row"})"><i class="fa fa-save"></i></a>
+            <a href="@Url.Action("AddEditWorkplan",new { workplanId = item.WorkPlanId, @class="hidden on-editing cancel-row"})"><i class="fa fa-times"></i></a>*@
+                                                <a href="@Url.Action("AddEditWorkplan",new { workplanId = item.WorkPlanId, @class="on-default edit-row"})"><i class="fa fa-pencil"></i></a>
+                                                <a href="@Url.Action("DeleteWorkplan",new { workplanId = item.WorkPlanId, @class="on-default remove-row"})"><i class="fa fa-trash-o"></i></a>
+                                            </td>
+
+                                        </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                                <div class="form-group m-b-0">
+                                    <div class="col-sm-offset-3 col-sm-9">
+                                        <a href="@Url.Action("AddEditWorkplan",new { @class="btn btn-info waves-effect waves-light"})">Nuevo</a>
+                                        @*<button type="button" class="btn btn-info waves-effect waves-light" onclick="location.href = 'Create';">Nuevo</button>*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+
+        </div> <!-- container -->
+    </div> <!-- content -->
+    <footer class="footer text-right">
+        2016 - 2017 © Group Sports.
+    </footer>
+</div>
+
+
+

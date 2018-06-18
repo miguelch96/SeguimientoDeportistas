@@ -59,12 +59,17 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\GroupSports\Bin\System.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -85,10 +90,6 @@
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Optimization">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
@@ -153,9 +154,11 @@
     <Compile Include="Controllers\CoachsController.cs" />
     <Compile Include="Controllers\DisciplinesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MacrociclosController.cs" />
     <Compile Include="Controllers\ParametersController.cs" />
     <Compile Include="Controllers\TeamsController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\WorkPlansController.cs" />
     <Compile Include="Controllers\WorkWeekController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -179,6 +182,10 @@
     <Compile Include="ViewModels\LstParameterViewModel.cs" />
     <Compile Include="ViewModels\LstTeamViewModel.cs" />
     <Compile Include="ViewModels\LstWorkWeeksViewModel.cs" />
+    <Compile Include="ViewModels\Macrociclos\AddEditMacrociclosViewModel.cs" />
+    <Compile Include="ViewModels\Macrociclos\LstMacrociclosViewModel.cs" />
+    <Compile Include="ViewModels\WorkPlans\AddEditWorkplanViewModel.cs" />
+    <Compile Include="ViewModels\WorkPlans\LstWorkPlanViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Antlr3.Runtime.dll" />
@@ -1014,6 +1021,12 @@
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Athlete\Index.cshtml" />
     <Content Include="Views\WorkWeek\Index.cshtml" />
+    <Content Include="Views\WorkPlans\Index.cshtml" />
+    <Content Include="Views\WorkPlans\AddEditWorkplan.cshtml" />
+    <Content Include="Views\Macrociclos\Index.cshtml" />
+    <Content Include="Views\Macrociclos\AddMacrociclo.cshtml" />
+    <Content Include="Views\Macrociclos\ByWorkPlan.cshtml" />
+    <Content Include="Views\Macrociclos\EditMacrociclo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -31,7 +31,7 @@ namespace GroupSports.DL.DALI
                 while (reader.Read())
                 {
 
-                    Session semana = new Session();
+                    /*Session semana = new Session();
                     semana.weekId = Convert.ToInt32(reader[0]);
                     semana.weekName = reader[1].ToString();
                     semana.weekObjective = reader[2].ToString();
@@ -54,7 +54,7 @@ namespace GroupSports.DL.DALI
                     else
                     {
                         semana.macrocicleId = null;
-                    }
+                    }*/
 
                     //if (!(reader[9] is DBNull))
                     //{
@@ -66,7 +66,7 @@ namespace GroupSports.DL.DALI
                     //}
                     //usuario.fechaNac = reader[8].ToString();
 
-                    semanas.Add(semana);
+                    //semanas.Add(semana);
                 }
 
             }

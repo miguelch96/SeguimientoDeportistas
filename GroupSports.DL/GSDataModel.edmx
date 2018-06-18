@@ -1,0 +1,595 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="GSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ATHLETE">
+          <Key>
+            <PropertyRef Name="AthleteId" />
+          </Key>
+          <Property Name="AthleteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="Discipline" Type="int" />
+          <Property Name="AgeCategory" Type="int" />
+        </EntityType>
+        <EntityType Name="COACH">
+          <Key>
+            <PropertyRef Name="CoachId" />
+          </Key>
+          <Property Name="CoachId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+        </EntityType>
+        <EntityType Name="MACROCICLO">
+          <Key>
+            <PropertyRef Name="MacrocicloId" />
+          </Key>
+          <Property Name="MacrocicloId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Objective" Type="varchar" MaxLength="100" />
+          <Property Name="WorkPlanId" Type="int" />
+          <Property Name="FechaInicio" Type="date" />
+          <Property Name="FechaFin" Type="date" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MESOCICLO">
+          <Key>
+            <PropertyRef Name="MesocicloId" />
+          </Key>
+          <Property Name="MesocicloId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Objective" Type="varchar" MaxLength="100" />
+          <Property Name="MacrocicloId" Type="int" />
+          <Property Name="FechaInicio" Type="date" />
+          <Property Name="FechaFin" Type="date" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SESION">
+          <Key>
+            <PropertyRef Name="SesionId" />
+          </Key>
+          <Property Name="SesionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WorkWeekId" Type="int" />
+          <Property Name="Nombre" Type="varchar" MaxLength="20" />
+          <Property Name="Objective" Type="varchar" MaxLength="50" />
+          <Property Name="RegisterDate" Type="datetime" />
+          <Property Name="Asistencia" Type="bit" />
+          <Property Name="Cumplimiento" Type="bit" />
+          <Property Name="HoraAsistencia" Type="time" Precision="7" />
+          <Property Name="HoraCumplimiento" Type="time" Precision="7" />
+          <Property Name="Bitacora" Type="varchar" MaxLength="500" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserLogin" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserPass" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CellPhone" Type="varchar" MaxLength="50" />
+          <Property Name="Adress" Type="varchar" MaxLength="100" />
+          <Property Name="EmailAdress" Type="varchar" MaxLength="100" />
+          <Property Name="FechaNac" Type="date" />
+          <Property Name="UserType" Type="int" />
+          <Property Name="Estado" Type="bit" />
+        </EntityType>
+        <EntityType Name="WORKPLAN">
+          <Key>
+            <PropertyRef Name="WorkPlanId" />
+          </Key>
+          <Property Name="WorkPlanId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Objective" Type="varchar" MaxLength="100" />
+          <Property Name="CoachId" Type="int" />
+          <Property Name="FechaInicio" Type="date" />
+          <Property Name="FechaFin" Type="date" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WORKWEEK">
+          <Key>
+            <PropertyRef Name="WorkWeekId" />
+          </Key>
+          <Property Name="WorkWeekId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Objective" Type="varchar" MaxLength="100" />
+          <Property Name="MesocicloId" Type="int" />
+          <Property Name="FechaInicio" Type="date" />
+          <Property Name="FechaFin" Type="date" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__ATHLETE__UserId__59FA5E80">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <End Role="ATHLETE" Type="Self.ATHLETE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ATHLETE">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__COACH__UserId__5CD6CB2B">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <End Role="COACH" Type="Self.COACH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="COACH">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MACROCICL__WorkP__5DCAEF64">
+          <End Role="WORKPLAN" Type="Self.WORKPLAN" Multiplicity="0..1" />
+          <End Role="MACROCICLO" Type="Self.MACROCICLO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WORKPLAN">
+              <PropertyRef Name="WorkPlanId" />
+            </Principal>
+            <Dependent Role="MACROCICLO">
+              <PropertyRef Name="WorkPlanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MESOCICLO__Macro__5EBF139D">
+          <End Role="MACROCICLO" Type="Self.MACROCICLO" Multiplicity="0..1" />
+          <End Role="MESOCICLO" Type="Self.MESOCICLO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MACROCICLO">
+              <PropertyRef Name="MacrocicloId" />
+            </Principal>
+            <Dependent Role="MESOCICLO">
+              <PropertyRef Name="MacrocicloId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__WORKWEEK__Mesoci__6754599E">
+          <End Role="MESOCICLO" Type="Self.MESOCICLO" Multiplicity="0..1" />
+          <End Role="WORKWEEK" Type="Self.WORKWEEK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MESOCICLO">
+              <PropertyRef Name="MesocicloId" />
+            </Principal>
+            <Dependent Role="WORKWEEK">
+              <PropertyRef Name="MesocicloId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SESION_WORKWEEK">
+          <End Role="WORKWEEK" Type="Self.WORKWEEK" Multiplicity="0..1" />
+          <End Role="SESION" Type="Self.SESION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WORKWEEK">
+              <PropertyRef Name="WorkWeekId" />
+            </Principal>
+            <Dependent Role="SESION">
+              <PropertyRef Name="WorkWeekId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WORKPLAN_COACH">
+          <End Role="COACH" Type="Self.COACH" Multiplicity="0..1" />
+          <End Role="WORKPLAN" Type="Self.WORKPLAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COACH">
+              <PropertyRef Name="CoachId" />
+            </Principal>
+            <Dependent Role="WORKPLAN">
+              <PropertyRef Name="CoachId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GSModelStoreContainer">
+          <EntitySet Name="ATHLETE" EntityType="Self.ATHLETE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COACH" EntityType="Self.COACH" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MACROCICLO" EntityType="Self.MACROCICLO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MESOCICLO" EntityType="Self.MESOCICLO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SESION" EntityType="Self.SESION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WORKPLAN" EntityType="Self.WORKPLAN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WORKWEEK" EntityType="Self.WORKWEEK" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__ATHLETE__UserId__59FA5E80" Association="Self.FK__ATHLETE__UserId__59FA5E80">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="ATHLETE" EntitySet="ATHLETE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__COACH__UserId__5CD6CB2B" Association="Self.FK__COACH__UserId__5CD6CB2B">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="COACH" EntitySet="COACH" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MACROCICL__WorkP__5DCAEF64" Association="Self.FK__MACROCICL__WorkP__5DCAEF64">
+            <End Role="WORKPLAN" EntitySet="WORKPLAN" />
+            <End Role="MACROCICLO" EntitySet="MACROCICLO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MESOCICLO__Macro__5EBF139D" Association="Self.FK__MESOCICLO__Macro__5EBF139D">
+            <End Role="MACROCICLO" EntitySet="MACROCICLO" />
+            <End Role="MESOCICLO" EntitySet="MESOCICLO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__WORKWEEK__Mesoci__6754599E" Association="Self.FK__WORKWEEK__Mesoci__6754599E">
+            <End Role="MESOCICLO" EntitySet="MESOCICLO" />
+            <End Role="WORKWEEK" EntitySet="WORKWEEK" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SESION_WORKWEEK" Association="Self.FK_SESION_WORKWEEK">
+            <End Role="WORKWEEK" EntitySet="WORKWEEK" />
+            <End Role="SESION" EntitySet="SESION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WORKPLAN_COACH" Association="Self.FK_WORKPLAN_COACH">
+            <End Role="COACH" EntitySet="COACH" />
+            <End Role="WORKPLAN" EntitySet="WORKPLAN" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="GSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ATHLETE" EntityType="GSModel.ATHLETE" />
+          <EntitySet Name="COACH" EntityType="GSModel.COACH" />
+          <EntitySet Name="MACROCICLO" EntityType="GSModel.MACROCICLO" />
+          <EntitySet Name="MESOCICLO" EntityType="GSModel.MESOCICLO" />
+          <EntitySet Name="SESION" EntityType="GSModel.SESION" />
+          <EntitySet Name="USUARIO" EntityType="GSModel.USUARIO" />
+          <EntitySet Name="WORKPLAN" EntityType="GSModel.WORKPLAN" />
+          <EntitySet Name="WORKWEEK" EntityType="GSModel.WORKWEEK" />
+          <AssociationSet Name="FK__ATHLETE__UserId__59FA5E80" Association="GSModel.FK__ATHLETE__UserId__59FA5E80">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="ATHLETE" EntitySet="ATHLETE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__COACH__UserId__5CD6CB2B" Association="GSModel.FK__COACH__UserId__5CD6CB2B">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="COACH" EntitySet="COACH" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WORKPLAN_COACH" Association="GSModel.FK_WORKPLAN_COACH">
+            <End Role="COACH" EntitySet="COACH" />
+            <End Role="WORKPLAN" EntitySet="WORKPLAN" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MACROCICL__WorkP__5DCAEF64" Association="GSModel.FK__MACROCICL__WorkP__5DCAEF64">
+            <End Role="WORKPLAN" EntitySet="WORKPLAN" />
+            <End Role="MACROCICLO" EntitySet="MACROCICLO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MESOCICLO__Macro__5EBF139D" Association="GSModel.FK__MESOCICLO__Macro__5EBF139D">
+            <End Role="MACROCICLO" EntitySet="MACROCICLO" />
+            <End Role="MESOCICLO" EntitySet="MESOCICLO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__WORKWEEK__Mesoci__6754599E" Association="GSModel.FK__WORKWEEK__Mesoci__6754599E">
+            <End Role="MESOCICLO" EntitySet="MESOCICLO" />
+            <End Role="WORKWEEK" EntitySet="WORKWEEK" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SESION_WORKWEEK" Association="GSModel.FK_SESION_WORKWEEK">
+            <End Role="WORKWEEK" EntitySet="WORKWEEK" />
+            <End Role="SESION" EntitySet="SESION" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ATHLETE">
+          <Key>
+            <PropertyRef Name="AthleteId" />
+          </Key>
+          <Property Name="AthleteId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="Discipline" Type="Int32" />
+          <Property Name="AgeCategory" Type="Int32" />
+          <NavigationProperty Name="USUARIO" Relationship="GSModel.FK__ATHLETE__UserId__59FA5E80" FromRole="ATHLETE" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="COACH">
+          <Key>
+            <PropertyRef Name="CoachId" />
+          </Key>
+          <Property Name="CoachId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <NavigationProperty Name="USUARIO" Relationship="GSModel.FK__COACH__UserId__5CD6CB2B" FromRole="COACH" ToRole="USUARIO" />
+          <NavigationProperty Name="WORKPLAN" Relationship="GSModel.FK_WORKPLAN_COACH" FromRole="COACH" ToRole="WORKPLAN" />
+        </EntityType>
+        <EntityType Name="MACROCICLO">
+          <Key>
+            <PropertyRef Name="MacrocicloId" />
+          </Key>
+          <Property Name="MacrocicloId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Objective" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="WorkPlanId" Type="Int32" />
+          <Property Name="FechaInicio" Type="DateTime" Precision="0" />
+          <Property Name="FechaFin" Type="DateTime" Precision="0" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="WORKPLAN" Relationship="GSModel.FK__MACROCICL__WorkP__5DCAEF64" FromRole="MACROCICLO" ToRole="WORKPLAN" />
+          <NavigationProperty Name="MESOCICLO" Relationship="GSModel.FK__MESOCICLO__Macro__5EBF139D" FromRole="MACROCICLO" ToRole="MESOCICLO" />
+        </EntityType>
+        <EntityType Name="MESOCICLO">
+          <Key>
+            <PropertyRef Name="MesocicloId" />
+          </Key>
+          <Property Name="MesocicloId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Objective" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MacrocicloId" Type="Int32" />
+          <Property Name="FechaInicio" Type="DateTime" Precision="0" />
+          <Property Name="FechaFin" Type="DateTime" Precision="0" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="MACROCICLO" Relationship="GSModel.FK__MESOCICLO__Macro__5EBF139D" FromRole="MESOCICLO" ToRole="MACROCICLO" />
+          <NavigationProperty Name="WORKWEEK" Relationship="GSModel.FK__WORKWEEK__Mesoci__6754599E" FromRole="MESOCICLO" ToRole="WORKWEEK" />
+        </EntityType>
+        <EntityType Name="SESION">
+          <Key>
+            <PropertyRef Name="SesionId" />
+          </Key>
+          <Property Name="SesionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WorkWeekId" Type="Int32" />
+          <Property Name="Nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Objective" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RegisterDate" Type="DateTime" Precision="3" />
+          <Property Name="Asistencia" Type="Boolean" />
+          <Property Name="Cumplimiento" Type="Boolean" />
+          <Property Name="HoraAsistencia" Type="Time" Precision="7" />
+          <Property Name="HoraCumplimiento" Type="Time" Precision="7" />
+          <Property Name="Bitacora" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="WORKWEEK" Relationship="GSModel.FK_SESION_WORKWEEK" FromRole="SESION" ToRole="WORKWEEK" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserLogin" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserPass" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CellPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Adress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EmailAdress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FechaNac" Type="DateTime" Precision="0" />
+          <Property Name="UserType" Type="Int32" />
+          <Property Name="Estado" Type="Boolean" />
+          <NavigationProperty Name="ATHLETE" Relationship="GSModel.FK__ATHLETE__UserId__59FA5E80" FromRole="USUARIO" ToRole="ATHLETE" />
+          <NavigationProperty Name="COACH" Relationship="GSModel.FK__COACH__UserId__5CD6CB2B" FromRole="USUARIO" ToRole="COACH" />
+        </EntityType>
+        <EntityType Name="WORKPLAN">
+          <Key>
+            <PropertyRef Name="WorkPlanId" />
+          </Key>
+          <Property Name="WorkPlanId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Objective" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CoachId" Type="Int32" />
+          <Property Name="FechaInicio" Type="DateTime" Precision="0" />
+          <Property Name="FechaFin" Type="DateTime" Precision="0" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="COACH" Relationship="GSModel.FK_WORKPLAN_COACH" FromRole="WORKPLAN" ToRole="COACH" />
+          <NavigationProperty Name="MACROCICLO" Relationship="GSModel.FK__MACROCICL__WorkP__5DCAEF64" FromRole="WORKPLAN" ToRole="MACROCICLO" />
+        </EntityType>
+        <EntityType Name="WORKWEEK">
+          <Key>
+            <PropertyRef Name="WorkWeekId" />
+          </Key>
+          <Property Name="WorkWeekId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Objective" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MesocicloId" Type="Int32" />
+          <Property Name="FechaInicio" Type="DateTime" Precision="0" />
+          <Property Name="FechaFin" Type="DateTime" Precision="0" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="MESOCICLO" Relationship="GSModel.FK__WORKWEEK__Mesoci__6754599E" FromRole="WORKWEEK" ToRole="MESOCICLO" />
+          <NavigationProperty Name="SESION" Relationship="GSModel.FK_SESION_WORKWEEK" FromRole="WORKWEEK" ToRole="SESION" />
+        </EntityType>
+        <Association Name="FK__ATHLETE__UserId__59FA5E80">
+          <End Type="GSModel.USUARIO" Role="USUARIO" Multiplicity="0..1" />
+          <End Type="GSModel.ATHLETE" Role="ATHLETE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ATHLETE">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__COACH__UserId__5CD6CB2B">
+          <End Type="GSModel.USUARIO" Role="USUARIO" Multiplicity="0..1" />
+          <End Type="GSModel.COACH" Role="COACH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="COACH">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WORKPLAN_COACH">
+          <End Type="GSModel.COACH" Role="COACH" Multiplicity="0..1" />
+          <End Type="GSModel.WORKPLAN" Role="WORKPLAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COACH">
+              <PropertyRef Name="CoachId" />
+            </Principal>
+            <Dependent Role="WORKPLAN">
+              <PropertyRef Name="CoachId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MACROCICL__WorkP__5DCAEF64">
+          <End Type="GSModel.WORKPLAN" Role="WORKPLAN" Multiplicity="0..1" />
+          <End Type="GSModel.MACROCICLO" Role="MACROCICLO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WORKPLAN">
+              <PropertyRef Name="WorkPlanId" />
+            </Principal>
+            <Dependent Role="MACROCICLO">
+              <PropertyRef Name="WorkPlanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MESOCICLO__Macro__5EBF139D">
+          <End Type="GSModel.MACROCICLO" Role="MACROCICLO" Multiplicity="0..1" />
+          <End Type="GSModel.MESOCICLO" Role="MESOCICLO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MACROCICLO">
+              <PropertyRef Name="MacrocicloId" />
+            </Principal>
+            <Dependent Role="MESOCICLO">
+              <PropertyRef Name="MacrocicloId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__WORKWEEK__Mesoci__6754599E">
+          <End Type="GSModel.MESOCICLO" Role="MESOCICLO" Multiplicity="0..1" />
+          <End Type="GSModel.WORKWEEK" Role="WORKWEEK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MESOCICLO">
+              <PropertyRef Name="MesocicloId" />
+            </Principal>
+            <Dependent Role="WORKWEEK">
+              <PropertyRef Name="MesocicloId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SESION_WORKWEEK">
+          <End Type="GSModel.WORKWEEK" Role="WORKWEEK" Multiplicity="0..1" />
+          <End Type="GSModel.SESION" Role="SESION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WORKWEEK">
+              <PropertyRef Name="WorkWeekId" />
+            </Principal>
+            <Dependent Role="SESION">
+              <PropertyRef Name="WorkWeekId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GSModelStoreContainer" CdmEntityContainer="GSEntities">
+          <EntitySetMapping Name="ATHLETE">
+            <EntityTypeMapping TypeName="GSModel.ATHLETE">
+              <MappingFragment StoreEntitySet="ATHLETE">
+                <ScalarProperty Name="AgeCategory" ColumnName="AgeCategory" />
+                <ScalarProperty Name="Discipline" ColumnName="Discipline" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="AthleteId" ColumnName="AthleteId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COACH">
+            <EntityTypeMapping TypeName="GSModel.COACH">
+              <MappingFragment StoreEntitySet="COACH">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CoachId" ColumnName="CoachId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MACROCICLO">
+            <EntityTypeMapping TypeName="GSModel.MACROCICLO">
+              <MappingFragment StoreEntitySet="MACROCICLO">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="WorkPlanId" ColumnName="WorkPlanId" />
+                <ScalarProperty Name="Objective" ColumnName="Objective" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MacrocicloId" ColumnName="MacrocicloId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MESOCICLO">
+            <EntityTypeMapping TypeName="GSModel.MESOCICLO">
+              <MappingFragment StoreEntitySet="MESOCICLO">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="MacrocicloId" ColumnName="MacrocicloId" />
+                <ScalarProperty Name="Objective" ColumnName="Objective" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MesocicloId" ColumnName="MesocicloId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SESION">
+            <EntityTypeMapping TypeName="GSModel.SESION">
+              <MappingFragment StoreEntitySet="SESION">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Bitacora" ColumnName="Bitacora" />
+                <ScalarProperty Name="HoraCumplimiento" ColumnName="HoraCumplimiento" />
+                <ScalarProperty Name="HoraAsistencia" ColumnName="HoraAsistencia" />
+                <ScalarProperty Name="Cumplimiento" ColumnName="Cumplimiento" />
+                <ScalarProperty Name="Asistencia" ColumnName="Asistencia" />
+                <ScalarProperty Name="RegisterDate" ColumnName="RegisterDate" />
+                <ScalarProperty Name="Objective" ColumnName="Objective" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="WorkWeekId" ColumnName="WorkWeekId" />
+                <ScalarProperty Name="SesionId" ColumnName="SesionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIO">
+            <EntityTypeMapping TypeName="GSModel.USUARIO">
+              <MappingFragment StoreEntitySet="USUARIO">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="FechaNac" ColumnName="FechaNac" />
+                <ScalarProperty Name="EmailAdress" ColumnName="EmailAdress" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+                <ScalarProperty Name="CellPhone" ColumnName="CellPhone" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UserPass" ColumnName="UserPass" />
+                <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WORKPLAN">
+            <EntityTypeMapping TypeName="GSModel.WORKPLAN">
+              <MappingFragment StoreEntitySet="WORKPLAN">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="CoachId" ColumnName="CoachId" />
+                <ScalarProperty Name="Objective" ColumnName="Objective" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="WorkPlanId" ColumnName="WorkPlanId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WORKWEEK">
+            <EntityTypeMapping TypeName="GSModel.WORKWEEK">
+              <MappingFragment StoreEntitySet="WORKWEEK">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="MesocicloId" ColumnName="MesocicloId" />
+                <ScalarProperty Name="Objective" ColumnName="Objective" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="WorkWeekId" ColumnName="WorkWeekId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

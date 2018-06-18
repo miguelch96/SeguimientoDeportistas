@@ -59,27 +59,90 @@
     <Compile Include="Actors\Session.cs" />
     <Compile Include="Actors\User.cs" />
     <Compile Include="Actors\WorkWeek.cs" />
+    <Compile Include="ATHLETE.cs">
+      <DependentUpon>GSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="COACH.cs">
+      <DependentUpon>GSDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DALI\AthleteRepository.cs" />
+    <Compile Include="DALI\CoachRepository.cs" />
     <Compile Include="DALI\IAthleteRepository.cs" />
+    <Compile Include="DALI\ICoachRepository.cs" />
+    <Compile Include="DALI\IMacrocicloRepository.cs" />
     <Compile Include="DALI\IMesocicloRepository.cs" />
     <Compile Include="DALI\ISessionRepository.cs" />
     <Compile Include="DALI\IUserRepository.cs" />
+    <Compile Include="DALI\IWorkPlanRepository.cs" />
     <Compile Include="DALI\IWorkWeekRepository.cs" />
+    <Compile Include="DALI\MacrocicloRepository.cs" />
     <Compile Include="DALI\MesocicloRepository.cs" />
     <Compile Include="DALI\SessionRepository.cs" />
     <Compile Include="DALI\UserRepository.cs" />
+    <Compile Include="DALI\WorkplanRepository.cs" />
     <Compile Include="DALI\WorkWeekRepository.cs" />
+    <Compile Include="GSDataModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GSDataModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GSDataModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GSDataModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GSDataModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="MACROCICLO.cs">
+      <DependentUpon>GSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MESOCICLO.cs">
+      <DependentUpon>GSDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SESION.cs">
+      <DependentUpon>GSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="USUARIO.cs">
+      <DependentUpon>GSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WORKPLAN.cs">
+      <DependentUpon>GSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WORKWEEK.cs">
+      <DependentUpon>GSDataModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config">
       <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="GSDataModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>GSDataModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="GSDataModel.edmx.diagram">
+      <DependentUpon>GSDataModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="GSDataModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>GSDataModel.edmx</DependentUpon>
+      <LastGenOutput>GSDataModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="GSDataModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>GSDataModel.edmx</DependentUpon>
+      <LastGenOutput>GSDataModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

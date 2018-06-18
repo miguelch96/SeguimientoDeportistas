@@ -42,10 +42,14 @@
   <ItemGroup>
     <Compile Include="BC\AthleteService.cs" />
     <Compile Include="BC\IAthleteService.cs" />
+    <Compile Include="BC\IMacrocicloService.cs" />
     <Compile Include="BC\IUserService.cs" />
     <Compile Include="BC\IWeekService.cs" />
+    <Compile Include="BC\IWorkPlanService.cs" />
+    <Compile Include="BC\MacrocicloService.cs" />
     <Compile Include="BC\UserService.cs" />
     <Compile Include="BC\WeekService.cs" />
+    <Compile Include="BC\WorkPlanService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

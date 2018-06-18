@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0912b3213e5e4a5a8432ce432a8787c8" Name="Diagram1" ZoomLevel="64">
+        <EntityTypeShape EntityType="GSModel.ATHLETE" Width="1.5" PointX="3" PointY="5.25" />
+        <EntityTypeShape EntityType="GSModel.COACH" Width="1.5" PointX="3" PointY="1.875" />
+        <EntityTypeShape EntityType="GSModel.MACROCICLO" Width="1.5" PointX="7.5" PointY="1.375" />
+        <EntityTypeShape EntityType="GSModel.MESOCICLO" Width="1.5" PointX="9.75" PointY="1.375" />
+        <EntityTypeShape EntityType="GSModel.SESION" Width="1.5" PointX="14.25" PointY="1.125" />
+        <EntityTypeShape EntityType="GSModel.USUARIO" Width="1.5" PointX="0.75" PointY="2.375" />
+        <EntityTypeShape EntityType="GSModel.WORKPLAN" Width="1.5" PointX="5.25" PointY="1.375" />
+        <EntityTypeShape EntityType="GSModel.WORKWEEK" Width="1.5" PointX="12" PointY="1.375" />
+        <AssociationConnector Association="GSModel.FK__ATHLETE__UserId__59FA5E80" />
+        <AssociationConnector Association="GSModel.FK__COACH__UserId__5CD6CB2B" />
+        <AssociationConnector Association="GSModel.FK_WORKPLAN_COACH" />
+        <AssociationConnector Association="GSModel.FK__MACROCICL__WorkP__5DCAEF64" />
+        <AssociationConnector Association="GSModel.FK__MESOCICLO__Macro__5EBF139D" />
+        <AssociationConnector Association="GSModel.FK__WORKWEEK__Mesoci__6754599E" />
+        <AssociationConnector Association="GSModel.FK_SESION_WORKWEEK" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
