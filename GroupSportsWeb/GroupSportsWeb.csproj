@@ -1035,6 +1035,8 @@
     <Content Include="Views\Mesociclos\Index.cshtml" />
     <Content Include="Views\Sessions\Index.cshtml" />
     <Content Include="Views\Sessions\AddEditSession.cshtml" />
+    <Content Include="Views\Mesociclos\AddEditMesociclo.cshtml" />
+    <Content Include="Views\WorkWeek\AddEditWorkWeek.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -8,7 +8,7 @@ namespace GroupSportsWeb.ViewModels.Mesociclos
 {
     public class LstMesociclosViewModel
     {
-        public List<MESOCICLO> LstMesociclos { get; set; }
+        public List<MESOCICLO> LstMesociclos { get; set; } = new List<MESOCICLO>();
         public MACROCICLO Macrociclo { get; set; }
     }
 }

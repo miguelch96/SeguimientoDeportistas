@@ -1,8 +1,112 @@
 ﻿@model GroupSportsWeb.ViewModels.Sessions.AddEditSessionViewModel
 
 @{
-    ViewBag.Title = "title";
-    Layout = "_Layout";
+    ViewBag.Title = "AddEdit Sesion";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>title</h2>
+<h2>Add Edit Session</h2>
+
+<div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="page-title-box">
+                        <h4 class="page-title">Sesiones </h4>
+                        <ol class="breadcrumb p-0 m-0">
+                            <li>
+                                <a href="#">Zircos</a>
+                            </li>
+                            <li>
+                                <a href="#">Forms </a>
+                            </li>
+                            <li class="active">
+                                Form elements
+                            </li>
+                        </ol>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card-box">
+                        <h4 class="m-t-0 header-title"><b>Nueva Sesión</b></h4>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                @using (Html.BeginForm("AddEditSession", "Sessions", FormMethod.Post, new { id = "popupForm" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                <form class="form-horizontal" role="form">
+                                    @Html.HiddenFor(model => model.SessionId)
+
+                                    <div class="form-group">
+                                        <div class="col-md-11">
+                                            @Html.LabelFor(x => x.WorkWeekId)
+                                            @Html.DropDownListFor(x => x.WorkWeekId, new SelectList(Model.LstWorkweeks, "WorkWeekId", "Nombre"),
+                                                "[-SELECCIONE-]", new {@class = "form-control"})
+                                            @Html.ValidationMessageFor(x => x.WorkWeekId)
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-md-11">
+                                            @Html.LabelFor(model => model.Name, new { @class = "col-md-2 control-label" })
+                                            @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-md-11">
+                                            @Html.LabelFor(model => model.Objective, new { @class = "col-md-2 control-label" })
+                                            @Html.TextBoxFor(model => model.Objective, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.Objective, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-md-11">
+                                            @Html.LabelFor(model => model.Asistencia, new { @class = "col-md-2 control-label" })
+                                            @Html.CheckBoxFor(model => model.Asistencia,new { @class = "form-control"})
+                                            @Html.ValidationMessageFor(model => model.Asistencia, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-md-11">
+                                            @Html.LabelFor(model => model.Cumplimiento, new { @class = "col-md-2 control-label" })
+                                            @Html.CheckBoxFor(model => model.Cumplimiento, new { @class = "form-control"})
+                                            @Html.ValidationMessageFor(model => model.Cumplimiento, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group m-b-0">
+                                        <div class="col-sm-offset-3 col-sm-9">
+                                            <button type="submit" value="Create" class="btn btn-info waves-effect waves-light">Crear</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+    $(function () { // will trigger when the document is ready
+        $('.datepicker').datepicker(); //Initialise any date pickers
+    });
+</script>

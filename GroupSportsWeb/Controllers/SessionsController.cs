@@ -63,6 +63,7 @@ namespace GroupSportsWeb.Controllers
                     session.HoraCumplimiento = null;
                     session.Bitacora = model.Bitacora;
                     session.Estado = model.Estado;
+                    session.WorkWeekId = model.WorkWeekId;
 
                     if (model.SessionId.HasValue)
                     {
@@ -73,7 +74,7 @@ namespace GroupSportsWeb.Controllers
                         SessionService.Add(session);
                     }
                     transaction.Complete();
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index", new {workweekid = model.WorkWeekId});
                 }
             }
             catch (Exception ex)

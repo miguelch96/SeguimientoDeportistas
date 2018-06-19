@@ -56,7 +56,7 @@
                                                 <td>@item.Objective</td>
                                                 <td>@item.FechaInicio</td>
                                                 <td>@item.FechaFin</td>
-                                                <td>@item.MESOCICLO.Name</td>
+                                                <td>@Model.Mesociclo.Name</td>
                                                 <td class="actions">
                                                     <a href="@Url.Action("AddEditWorkWeek", new {workweekid = item.WorkWeekId, @class = "on-default edit-row"})"><i class="fa fa-pencil"></i></a>
                                                     <a href="@Url.Action("DeleteWorkWeek", new {workweekid = item.WorkWeekId, @class = "on-default remove-row"})"><i class="fa fa-trash-o"></i></a>

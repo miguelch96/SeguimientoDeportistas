@@ -55,7 +55,7 @@
                                                 <td>@item.Nombre</td>
                                                 <td>@item.Objective</td>
                                                 <td>@item.RegisterDate</td>
-                                                <td>@item.WORKWEEK.Nombre</td>
+                                                <td>@Model.Workweek.Nombre</td>
                                                 <td class="actions">
                                                     <a href="@Url.Action("AddEditSession", new {sessionid = item.SesionId, @class = "on-default edit-row"})"><i class="fa fa-pencil"></i></a>
                                                     <a href="@Url.Action("DeleteSession", new {sessionid = item.SesionId, @class = "on-default remove-row"})"><i class="fa fa-trash-o"></i></a>

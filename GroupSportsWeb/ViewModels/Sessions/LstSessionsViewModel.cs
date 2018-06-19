@@ -8,7 +8,7 @@ namespace GroupSportsWeb.ViewModels.Sessions
 {
     public class LstSessionsViewModel
     {
-        public List<SESION> LstSessions { get; set; }
+        public List<SESION> LstSessions { get; set; } = new List<SESION>();
         public WORKWEEK Workweek { get; set; }
     }
 }

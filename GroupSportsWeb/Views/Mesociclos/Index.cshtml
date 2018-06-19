@@ -45,7 +45,7 @@
                                             <th data-priority="1">Objetivo</th>
                                             <th data-priority="1">Fecha de Inicio</th>
                                             <th data-priority="1">Fecha de Fin</th>
-                                            <th data-priority="1">Work Plan</th>
+                                            <th data-priority="1">Macrociclo</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
@@ -57,7 +57,7 @@
                                                 <td>@item.Objective</td>
                                                 <td>@item.FechaInicio</td>
                                                 <td>@item.FechaFin</td>
-                                                <td>@item.MACROCICLO.Name</td>
+                                                <td>@Model.Macrociclo.Name</td>
                                                 <td class="actions">
                                                     <a href="@Url.Action("AddEditMesociclo", new {mesocicloid = item.MesocicloId, @class = "on-default edit-row"})"><i class="fa fa-pencil"></i></a>
                                                     <a href="@Url.Action("DeleteMesociclo", new {mesocicloid = item.MesocicloId, @class = "on-default remove-row"})"><i class="fa fa-trash-o"></i></a>

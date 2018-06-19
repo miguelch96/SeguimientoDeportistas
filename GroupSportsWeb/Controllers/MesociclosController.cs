@@ -72,7 +72,7 @@ namespace GroupSportsWeb.Controllers
                         MesocicloService.Add(mesociclo);
                     }
                     transaction.Complete();
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index", new {macrocicloid = model.MacrocicloId});
                 }
             }
             catch (Exception ex)
