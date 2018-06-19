@@ -16,7 +16,7 @@ namespace GroupSports.DL.DALI
             }
         }
 
-        public COACH Get(int id)
+        public COACH Find(int id)
         {
             using (GSEntities entities = new GSEntities())
             {
@@ -30,6 +30,7 @@ namespace GroupSports.DL.DALI
             {
                 using (GSEntities entities = new GSEntities())
                 {
+                    coach.USUARIO.Estado = true;
                     entities.COACH.Add(coach);
                     entities.SaveChanges();
                 }

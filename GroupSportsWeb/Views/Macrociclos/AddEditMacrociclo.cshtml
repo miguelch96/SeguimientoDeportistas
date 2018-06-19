@@ -1,12 +1,10 @@
-﻿@using System.Web.UI.WebControls
-@model GroupSportsWeb.ViewModels.WorkPlans.AddEditWorkplanViewModel
-
+﻿@model GroupSportsWeb.ViewModels.Macrociclos.AddEditMacrocicloViewModel
 @{
-    ViewBag.Title = "AddEdit";
+    ViewBag.Title = "Agregar Macrociclo";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>AddEdit</h2>
+<h2>Add Macrociclo</h2>
 
 
 <div class="content-page">
@@ -17,7 +15,7 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="page-title-box">
-                        <h4 class="page-title">Work Plans </h4>
+                        <h4 class="page-title">Macrociclos </h4>
                         <ol class="breadcrumb p-0 m-0">
                             <li>
                                 <a href="#">Zircos</a>
@@ -38,16 +36,25 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card-box">
-                        <h4 class="m-t-0 header-title"><b>New Work Plan</b></h4>
+                        <h4 class="m-t-0 header-title"><b>New Macrociclo</b></h4>
 
                         <div class="row">
                             <div class="col-md-6">
-                                @using (Html.BeginForm("AddEditWorkplan", "WorkPlans", FormMethod.Post, new { id = "popupForm" }))
+                                @using (Html.BeginForm("AddEditMacrociclo", "Macrociclos", FormMethod.Post, new { id = "popupForm" }))
                                 {
                                     @Html.AntiForgeryToken()
                                 <form class="form-horizontal" role="form">
-                                    @Html.HiddenFor(model => model.WorkPlanId)
-                                    @Html.HiddenFor(model => model.CoachId)
+                                    @Html.HiddenFor(model => model.MacrocicloId)
+
+                                    <div class="form-group">
+                                        <div class="col-md-11">
+                                            @Html.LabelFor(x => x.WorkplanId)
+                                            @Html.DropDownListFor(x => x.WorkplanId, new SelectList(Model.LstWorkplans, "WorkplanId", "Name"),
+                                                "[-SELECCIONE-]", new {@class = "form-control"})
+                                            @Html.ValidationMessageFor(x => x.WorkplanId)
+                                        </div>
+                                    </div>
+
                                     <div class="form-group">
                                         <div class="col-md-11">
                                             @Html.LabelFor(model => model.Name, new { @class = "col-md-2 control-label" })
@@ -55,6 +62,7 @@
                                             @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
+
                                     <div class="form-group">
                                         <div class="col-md-11">
                                             @Html.LabelFor(model => model.Objective, new { @class = "col-md-2 control-label" })
@@ -103,3 +111,5 @@
         $('.datepicker').datepicker(); //Initialise any date pickers
     });
 </script>
+
+

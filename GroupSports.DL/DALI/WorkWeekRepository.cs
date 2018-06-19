@@ -10,67 +10,92 @@ using GroupSports.DL.Actors;
 
 namespace GroupSports.DL.DALI
 {
-    public class WorkWeekRepository:IWorkWeekRepository
+    public class WorkWeekRepository : IWorkWeekRepository
     {
-        string strConnection = ConfigurationManager.ConnectionStrings["micadena"].ConnectionString.ToString();
-
-        public List<WorkWeek> findAll(int id)
+        public List<WORKWEEK> Get(int? mesocicloid)
         {
-            List<WorkWeek> semanas = new List<WorkWeek>();
-            using (SqlConnection con = new SqlConnection(strConnection))
+            using (GSEntities entities = new GSEntities())
             {
-
-
-                SqlCommand cmd = new SqlCommand("sp_Select_Semanas_from_Mesociclo", con);
-                //SqlCommand cmd = new SqlCommand(sql, con);
-                con.Open();
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@MesocicloId", id);
-                
-                SqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
+                IQueryable<WORKWEEK> workweeks = entities.WORKWEEK.Where(x=>x.MESOCICLO.Estado && x.Estado);
+                if (mesocicloid.HasValue)
                 {
-
-                    WorkWeek semana = new WorkWeek();
-                    semana.weekId = Convert.ToInt32(reader[0]);
-                    semana.weekName = reader[1].ToString();
-                    semana.weekObjective = reader[2].ToString();
-
-                    if (!(reader[3] is DBNull))
-                    {
-                        semana.mesocicloId = Convert.ToInt32(reader[3]);
-                    }
-                    else
-                    {
-                        semana.mesocicloId = null;
-                    }
-                    semana.mesocicleName = reader[4].ToString();
-                    semana.mesocicleObjective = reader[5].ToString();
-
-                    if (!(reader[6] is DBNull))
-                    {
-                        semana.macrocicleId = Convert.ToInt32(reader[6]);
-                    }
-                    else
-                    {
-                        semana.macrocicleId = null;
-                    }
-
-                    //if (!(reader[9] is DBNull))
-                    //{
-                    //    usuario.userType = Convert.ToInt16(reader[9]);
-                    //}
-                    //else
-                    //{
-                    //    usuario.userType = null;
-                    //}
-                    //usuario.fechaNac = reader[8].ToString();
-
-                    semanas.Add(semana);
+                    workweeks = workweeks.Where(x => x.MESOCICLO.MesocicloId == mesocicloid);
                 }
-
+                return workweeks.ToList();
             }
-            return semanas;
+        }
+
+        public WORKWEEK Find(int id)
+        {
+            using (GSEntities entities = new GSEntities())
+            {
+                return entities.WORKWEEK.Find(id);
+            }
+        }
+
+        public void Add(WORKWEEK workweek)
+        {
+            try
+            {
+                using (GSEntities entities = new GSEntities())
+                {
+                    workweek.Estado = true;
+                    entities.WORKWEEK.Add(workweek);
+                    entities.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        public void Edit(WORKWEEK workweek)
+        {
+            try
+            {
+                using (GSEntities entities = new GSEntities())
+                {
+                    var workweekInDb = entities.WORKWEEK.Find(workweek.WorkWeekId);
+                    if (workweekInDb != null)
+                    {
+                        workweekInDb.Nombre = workweek.Nombre;
+                        workweekInDb.Objective = workweek.Objective;
+                        workweekInDb.FechaInicio = workweek.FechaInicio;
+                        workweekInDb.FechaFin = workweek.FechaFin;
+                        workweekInDb.MesocicloId = workweek.MesocicloId;
+                        entities.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        public void Delete(int id)
+        {
+            try
+            {
+                using (GSEntities entities = new GSEntities())
+                {
+                    var mesociclo = entities.MESOCICLO.Find(id);
+                    if (mesociclo != null)
+                    {
+                        mesociclo.Estado = false;
+                        entities.SaveChanges();
+                    }
+
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
     }
 }

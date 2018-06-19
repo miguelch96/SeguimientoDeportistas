@@ -32,8 +32,6 @@ namespace GroupSportsWeb.Controllers
                 var objWorkplan = WorkPlanService.Get(workplanId.Value);
                 viewModel.CargarDatos(objWorkplan);
             }
-
-            //viewModel.LstTipoDocumento = context.TipoDocumento.ToList();
             return View(viewModel);
         }
 
@@ -44,7 +42,6 @@ namespace GroupSportsWeb.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    //model.LstTipoDocumento = context.TipoDocumento.ToList();
                     TryUpdateModel(model);
                     return View(model);
                 }
@@ -58,7 +55,6 @@ namespace GroupSportsWeb.Controllers
                     workplan.FechaFin = DateTime.Today.AddDays(5);
                     workplan.CoachId = 1;
 
-
                     if (model.WorkPlanId.HasValue)
                     {
                         workplan.WorkPlanId = model.WorkPlanId.Value;
@@ -66,6 +62,7 @@ namespace GroupSportsWeb.Controllers
                     }
                     else
                     {
+                        workplan.Estado = true;
                         WorkPlanService.Add(workplan);
                     }
                     transaction.Complete();

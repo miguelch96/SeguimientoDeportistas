@@ -12,11 +12,11 @@ namespace GroupSports.BL.BC
     {
         public IMacrocicloRepository MacrocicloRepository { get; set; } = new MacrocicloRepository();
 
-        public List<MACROCICLO> Get()
+        public List<MACROCICLO> Get(int? workplanid)
         {
             try
             {
-                return MacrocicloRepository.Get();
+                return MacrocicloRepository.Get(workplanid);
             }
             catch (Exception e)
             {
@@ -25,24 +25,11 @@ namespace GroupSports.BL.BC
             }
         }
 
-        public MACROCICLO Get(int id)
+        public MACROCICLO Find(int id)
         {
             try
             {
-                return MacrocicloRepository.Get(id);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-        }
-
-        public List<MACROCICLO> GetByWorkplan(int workplanid)
-        {
-            try
-            {
-                return MacrocicloRepository.GetByWorkplan(workplanid);
+                return MacrocicloRepository.Find(id);
             }
             catch (Exception e)
             {

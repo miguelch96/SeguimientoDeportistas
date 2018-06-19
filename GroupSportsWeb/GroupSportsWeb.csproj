@@ -155,7 +155,9 @@
     <Compile Include="Controllers\DisciplinesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MacrociclosController.cs" />
+    <Compile Include="Controllers\MesociclosController.cs" />
     <Compile Include="Controllers\ParametersController.cs" />
+    <Compile Include="Controllers\SessionsController.cs" />
     <Compile Include="Controllers\TeamsController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\WorkPlansController.cs" />
@@ -181,11 +183,16 @@
     <Compile Include="ViewModels\LstIndexViewModel.cs" />
     <Compile Include="ViewModels\LstParameterViewModel.cs" />
     <Compile Include="ViewModels\LstTeamViewModel.cs" />
-    <Compile Include="ViewModels\LstWorkWeeksViewModel.cs" />
-    <Compile Include="ViewModels\Macrociclos\AddEditMacrociclosViewModel.cs" />
+    <Compile Include="ViewModels\Macrociclos\AddEditMacrocicloViewModel.cs" />
     <Compile Include="ViewModels\Macrociclos\LstMacrociclosViewModel.cs" />
+    <Compile Include="ViewModels\Mesociclos\AddEditMesocicloViewModel.cs" />
+    <Compile Include="ViewModels\Mesociclos\LstMesociclosViewModel.cs" />
+    <Compile Include="ViewModels\Sessions\AddEditSessionViewModel.cs" />
+    <Compile Include="ViewModels\Sessions\LstSessionsViewModel.cs" />
     <Compile Include="ViewModels\WorkPlans\AddEditWorkplanViewModel.cs" />
     <Compile Include="ViewModels\WorkPlans\LstWorkPlanViewModel.cs" />
+    <Compile Include="ViewModels\WorkWeeks\AddEditWorkWeekViewModel.cs" />
+    <Compile Include="ViewModels\WorkWeeks\LstWorkWeeksViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Antlr3.Runtime.dll" />
@@ -1024,9 +1031,10 @@
     <Content Include="Views\WorkPlans\Index.cshtml" />
     <Content Include="Views\WorkPlans\AddEditWorkplan.cshtml" />
     <Content Include="Views\Macrociclos\Index.cshtml" />
-    <Content Include="Views\Macrociclos\AddMacrociclo.cshtml" />
-    <Content Include="Views\Macrociclos\ByWorkPlan.cshtml" />
-    <Content Include="Views\Macrociclos\EditMacrociclo.cshtml" />
+    <Content Include="Views\Macrociclos\AddEditMacrociclo.cshtml" />
+    <Content Include="Views\Mesociclos\Index.cshtml" />
+    <Content Include="Views\Sessions\Index.cshtml" />
+    <Content Include="Views\Sessions\AddEditSession.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

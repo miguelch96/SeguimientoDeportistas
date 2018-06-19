@@ -8,23 +8,20 @@ namespace GroupSports.DL.DALI
 {
     public class MacrocicloRepository : IMacrocicloRepository
     {
-        public List<MACROCICLO> Get()
+        public List<MACROCICLO> Get(int? workplanid)
         {
             using (GSEntities entities = new GSEntities())
             {
-                return entities.MACROCICLO.ToList();
+                IQueryable<MACROCICLO> macrociclos = entities.MACROCICLO.Where(x=>x.WORKPLAN.Estado && x.Estado);
+                if (workplanid.HasValue)
+                {
+                    macrociclos = macrociclos.Where(x => x.WorkPlanId == workplanid);
+                }
+                return macrociclos.ToList();
             }
         }
 
-        public List<MACROCICLO> GetByWorkplan(int macrocicloid)
-        {
-            using (GSEntities entities = new GSEntities())
-            {
-                return entities.MACROCICLO.Where(x => x.WorkPlanId == macrocicloid).ToList();
-            }
-        }
-
-        public MACROCICLO Get(int id)
+        public MACROCICLO Find(int id)
         {
             using (GSEntities entities = new GSEntities())
             {

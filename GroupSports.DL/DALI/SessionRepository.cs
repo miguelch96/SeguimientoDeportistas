@@ -10,67 +10,95 @@ using System.Data.SqlClient;
 
 namespace GroupSports.DL.DALI
 {
-    public class SessionRepository
+    public class SessionRepository : ISessionRepository
     {
-        string strConnection = ConfigurationManager.ConnectionStrings["micadena"].ConnectionString.ToString();
-
-        public List<Session> findAll(int semanaId)
+        public List<SESION> Get(int? workweekid)
         {
-            List<Session> semanas = new List<Session>();
-            using (SqlConnection con = new SqlConnection(strConnection))
+            using (GSEntities entities = new GSEntities())
             {
-
-
-                SqlCommand cmd = new SqlCommand("sp_Select_Semanas_from_Mesociclo", con);
-                //SqlCommand cmd = new SqlCommand(sql, con);
-                con.Open();
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@MesocicloId", semanaId);
-
-                SqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
+                IQueryable<SESION> sesions = entities.SESION.Where(x=>x.WORKWEEK.Estado && x.Estado);
+                if (workweekid.HasValue)
                 {
-
-                    /*Session semana = new Session();
-                    semana.weekId = Convert.ToInt32(reader[0]);
-                    semana.weekName = reader[1].ToString();
-                    semana.weekObjective = reader[2].ToString();
-
-                    if (!(reader[3] is DBNull))
-                    {
-                        semana.mesocicloId = Convert.ToInt32(reader[3]);
-                    }
-                    else
-                    {
-                        semana.mesocicloId = null;
-                    }
-                    semana.mesocicleName = reader[4].ToString();
-                    semana.mesocicleObjective = reader[5].ToString();
-
-                    if (!(reader[6] is DBNull))
-                    {
-                        semana.macrocicleId = Convert.ToInt32(reader[6]);
-                    }
-                    else
-                    {
-                        semana.macrocicleId = null;
-                    }*/
-
-                    //if (!(reader[9] is DBNull))
-                    //{
-                    //    usuario.userType = Convert.ToInt16(reader[9]);
-                    //}
-                    //else
-                    //{
-                    //    usuario.userType = null;
-                    //}
-                    //usuario.fechaNac = reader[8].ToString();
-
-                    //semanas.Add(semana);
+                    sesions = sesions.Where(x => x.WORKWEEK.WorkWeekId == workweekid);
                 }
-
+                return sesions.ToList();
             }
-            return semanas;
+        }
+
+        public SESION Find(int id)
+        {
+            using (GSEntities entities = new GSEntities())
+            {
+                return entities.SESION.Find(id);
+            }
+        }
+
+        public void Add(SESION sesion)
+        {
+            try
+            {
+                using (GSEntities entities = new GSEntities())
+                {
+                    sesion.Estado = true;
+                    sesion.RegisterDate = DateTime.Now;
+                    entities.SESION.Add(sesion);
+                    entities.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        public void Edit(SESION sesion)
+        {
+            try
+            {
+                using (GSEntities entities = new GSEntities())
+                {
+                    var sesionInDb = entities.SESION.Find(sesion.SesionId);
+                    if (sesionInDb == null)
+                        return;
+
+                    sesionInDb.Nombre = sesion.Nombre;
+                    sesionInDb.Objective = sesion.Objective;
+                    sesionInDb.Asistencia = sesion.Asistencia;
+                    sesionInDb.Cumplimiento = sesion.Cumplimiento;
+                    sesionInDb.HoraAsistencia = sesion.HoraAsistencia;
+                    sesionInDb.HoraCumplimiento = sesion.HoraCumplimiento;
+                    sesionInDb.Bitacora = sesion.Bitacora;
+                    entities.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        public void Delete(int id)
+        {
+            try
+            {
+                using (GSEntities entities = new GSEntities())
+                {
+                    var sesion = entities.SESION.Find(id);
+                    if (sesion != null)
+                    {
+                        sesion.Estado = false;
+                        entities.SaveChanges();
+                    }
+
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
     }
 }

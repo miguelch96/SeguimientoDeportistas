@@ -9,9 +9,8 @@ namespace GroupSports.BL.BC
 {
     public interface IMacrocicloService
     {
-        List<MACROCICLO> Get();
-        MACROCICLO Get(int id);
-        List<MACROCICLO> GetByWorkplan(int workplanid);
+        List<MACROCICLO> Get(int? workplanid);
+        MACROCICLO Find(int id);
         void Add(MACROCICLO macrociclo);
         void Edit(MACROCICLO macrociclo);
         void Delete(int id);

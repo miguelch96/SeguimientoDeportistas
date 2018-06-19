@@ -1,20 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using GroupSports.DL.Actors;
-
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GroupSports.DL;
 
-namespace GroupSports.DL.DALI
+namespace GroupSports.BL.BC
 {
-    public interface IWorkWeekRepository
+    public interface IWorkWeekService
     {
-        List<WORKWEEK> Get(int? mesociclo);
+        List<WORKWEEK> Get(int? mesocicloid);
         WORKWEEK Find(int id);
         void Add(WORKWEEK workweek);
         void Edit(WORKWEEK workweek);
         void Delete(int id);
-
     }
 }

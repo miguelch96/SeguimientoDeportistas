@@ -17,11 +17,14 @@ namespace GroupSportsWeb.ViewModels.WorkPlans
         [Required]
         public string Objective { get; set; } = String.Empty;
 
-        public DateTime FechaInicio { get; set; }
+        public DateTime FechaInicio { get; set; } = DateTime.Today;
 
-        public DateTime FechaFin { get; set; }
+        public DateTime FechaFin { get; set; } = DateTime.Today.AddDays(5);
 
-        //public int CoachId { get; set; }
+        [Required]
+        public int CoachId { get; set; } = 1;
+
+        public bool Estado { get; set; }
 
         //public List<COACH> LstCoachs { get; set; } = new List<COACH>();
 

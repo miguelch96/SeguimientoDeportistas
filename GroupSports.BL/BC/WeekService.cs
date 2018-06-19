@@ -9,12 +9,12 @@ using GroupSports.DL.Actors;
 
 namespace GroupSports.BL.BC
 {
-    public class WeekService: IWeekService
+    public class WeekService
     {
-        IWorkWeekRepository WeekRepository = new WorkWeekRepository();
+        /*IWorkWeekRepository WeekRepository = new WorkWeekRepository();
         public List<WorkWeek> findAll(int id)
         {
             return WeekRepository.findAll(id);
-        }
+        }*/
     }
 }

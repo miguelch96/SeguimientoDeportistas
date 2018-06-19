@@ -16,81 +16,69 @@ namespace GroupSportsWeb.Controllers
         public IMacrocicloService MacrocicloService { get; set; } = new MacrocicloService();
         public IWorkPlanService WorkPlanService { get; set; } = new WorkPlanService();
 
-        // GET: Macrociclos
-        public ActionResult Index()
+        public ActionResult Index(int? workplanid)
         {
             var vm = new LstMacrociclosViewModel
             {
-                LstMacrociclos = MacrocicloService.Get()
+                LstMacrociclos = MacrocicloService.Get(workplanid),
+                Workplan = WorkPlanService.Get(workplanid.Value)
             };
-            return View();
-        }
-
-        public ActionResult ByWorkPlan(int workplanId)
-        {
-            var vm = new LstMacrociclosViewModel
-            {
-                LstMacrociclos = MacrocicloService.GetByWorkplan(workplanId),
-                Workplan = WorkPlanService.Get(workplanId)
-            };
-
             return View(vm);
         }
 
         public ActionResult AddEditMacrociclo(int? macrocicloId)
         {
 
-            var vm = new AddEditMacrociclosViewModel();
+            var vm = new AddEditMacrocicloViewModel();
 
             if (macrocicloId.HasValue)
             {
-                var objMacrociclo = MacrocicloService.Get(macrocicloId.Value);
+                var objMacrociclo = MacrocicloService.Find(macrocicloId.Value);
                 vm.CargarDatos(objMacrociclo);
             }
 
-            vm.LstCoachs = context.TipoDocumento.ToList();
-            return View(viewModel);
+            vm.LstWorkplans = WorkPlanService.Get();
+            return View(vm);
         }
 
         [HttpPost]
-        public ActionResult AddEditWorkplan(AddEditWorkplanViewModel model)
+        public ActionResult AddEditMacrociclo(AddEditMacrocicloViewModel model)
         {
             try
             {
                 if (!ModelState.IsValid)
                 {
-                    //model.LstTipoDocumento = context.TipoDocumento.ToList();
+                    model.LstWorkplans = WorkPlanService.Get();
                     TryUpdateModel(model);
                     return View(model);
                 }
                 using (var transaction = new TransactionScope())
                 {
-                    var workplan = new WORKPLAN();
+                    var macrociclo = new MACROCICLO();
 
-                    workplan.Name = model.Name;
-                    workplan.Objective = model.Objective;
-                    workplan.FechaInicio = DateTime.Today;
-                    workplan.FechaFin = DateTime.Today.AddDays(5);
-                    workplan.CoachId = 1;
+                    macrociclo.Name = model.Name;
+                    macrociclo.Objective = model.Objective;
+                    macrociclo.FechaInicio = DateTime.Today;
+                    macrociclo.FechaFin = DateTime.Today.AddDays(5);
+                    macrociclo.WorkPlanId = model.WorkplanId;
+                    macrociclo.Estado = macrociclo.Estado;
 
-
-                    if (model.WorkPlanId.HasValue)
+                    if (model.MacrocicloId.HasValue)
                     {
-                        workplan.WorkPlanId = model.WorkPlanId.Value;
-                        WorkPlanService.Edit(workplan);
+                        MacrocicloService.Edit(macrociclo);
                     }
                     else
                     {
-                        WorkPlanService.Add(workplan);
+                        MacrocicloService.Add(macrociclo);
                     }
                     transaction.Complete();
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index","Macrociclos", new{ workplanid = model.WorkplanId});
                 }
             }
             catch (Exception ex)
             {
-                var vm = new AddEditWorkplanViewModel();
-                //viewModel.LstTipoDocumento = context.TipoDocumento.ToList();
+                var vm = new AddEditMacrocicloViewModel();
+                vm.LstWorkplans = WorkPlanService.Get();
                 TryUpdateModel(model);
                 return View(vm);
             }

@@ -41,15 +41,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BC\AthleteService.cs" />
+    <Compile Include="BC\CoachService.cs" />
     <Compile Include="BC\IAthleteService.cs" />
+    <Compile Include="BC\ICoachService.cs" />
     <Compile Include="BC\IMacrocicloService.cs" />
+    <Compile Include="BC\IMesocicloService.cs" />
+    <Compile Include="BC\ISessionService.cs" />
     <Compile Include="BC\IUserService.cs" />
     <Compile Include="BC\IWeekService.cs" />
     <Compile Include="BC\IWorkPlanService.cs" />
+    <Compile Include="BC\IWorkWeekService.cs" />
     <Compile Include="BC\MacrocicloService.cs" />
+    <Compile Include="BC\MesocicloService.cs" />
+    <Compile Include="BC\SesionService.cs" />
     <Compile Include="BC\UserService.cs" />
     <Compile Include="BC\WeekService.cs" />
     <Compile Include="BC\WorkPlanService.cs" />
+    <Compile Include="BC\WorkWeekService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

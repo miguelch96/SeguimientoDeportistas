@@ -10,48 +10,91 @@ using System.Data.SqlClient;
 
 namespace GroupSports.DL.DALI
 {
-    public class MesocicloRepository
+    public class MesocicloRepository : IMesocicloRepository
     {
-        string strConnection = ConfigurationManager.ConnectionStrings["micadena"].ConnectionString.ToString();
-
-        public List<Mesociclo> findAll()
+        public List<MESOCICLO> Get(int? macrocicloid)
         {
-            List<Mesociclo> usuarios = new List<Mesociclo>();
-            using (SqlConnection con = new SqlConnection(strConnection))
+            using (GSEntities entities = new GSEntities())
             {
-
-
-                SqlCommand cmd = new SqlCommand("sp_Select_from_usuario", con);
-                //SqlCommand cmd = new SqlCommand(sql, con);
-                con.Open();
-                cmd.CommandType = CommandType.StoredProcedure;
-                SqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
+                IQueryable<MESOCICLO> mesociclos = entities.MESOCICLO.Where(x=>x.MACROCICLO.Estado && x.Estado);
+                if (macrocicloid.HasValue)
                 {
-                    //Mesociclo usuario = new Mesociclo();
-                    //usuario.userId = Convert.ToInt16(reader[0]);
-                    //usuario.userLogin = reader[1].ToString();
-                    //usuario.userPass = reader[2].ToString();
-                    //usuario.name = reader[3].ToString();
-                    //usuario.lastName = reader[4].ToString();
-                    //usuario.cellPhone = reader[5].ToString();
-                    //usuario.address = reader[6].ToString();
-                    //usuario.emailAdress = reader[7].ToString();
-                    //if (!(reader[9] is DBNull))
-                    //{
-                    //    usuario.userType = Convert.ToInt16(reader[9]);
-                    //}
-                    //else
-                    //{
-                    //    usuario.userType = null;
-                    //}
-                    //usuario.fechaNac = reader[8].ToString();
-
-                    
+                    mesociclos = mesociclos.Where(x => x.MACROCICLO.MacrocicloId == macrocicloid);
                 }
-
+                return mesociclos.ToList();
             }
-            return usuarios;
+        }
+
+        public MESOCICLO Find(int id)
+        {
+            using (GSEntities entities = new GSEntities())
+            {
+                return entities.MESOCICLO.Find(id);
+            }
+        }
+
+        public void Add(MESOCICLO mesociclo)
+        {
+            try
+            {
+                using (GSEntities entities = new GSEntities())
+                {
+                    mesociclo.Estado = true;
+                    entities.MESOCICLO.Add(mesociclo);
+                    entities.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        public void Edit(MESOCICLO mesociclo)
+        {
+            try
+            {
+                using (GSEntities entities = new GSEntities())
+                {
+                    var mesocicloInDb = entities.MESOCICLO.Find(mesociclo.MesocicloId);
+                    if (mesocicloInDb != null)
+                    {
+                        mesocicloInDb.Name = mesociclo.Name;
+                        mesocicloInDb.Objective = mesociclo.Objective;
+                        mesocicloInDb.FechaInicio = mesociclo.FechaInicio;
+                        mesocicloInDb.FechaFin = mesociclo.FechaFin;
+                        entities.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        public void Delete(int id)
+        {
+            try
+            {
+                using (GSEntities entities = new GSEntities())
+                {
+                    var mesociclo = entities.MESOCICLO.Find(id);
+                    if (mesociclo != null)
+                    {
+                        mesociclo.Estado = false;
+                        entities.SaveChanges();
+                    }
+
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
     }
 }

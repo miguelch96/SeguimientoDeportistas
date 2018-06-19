@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GroupSports.DL.Actors;
+using GroupSports.DL;
 
-namespace GroupSports.DL.DALI
+namespace GroupSports.BL.BC
 {
-    public interface IMesocicloRepository
+    public interface IMesocicloService
     {
         List<MESOCICLO> Get(int? macrocicloid);
         MESOCICLO Find(int id);

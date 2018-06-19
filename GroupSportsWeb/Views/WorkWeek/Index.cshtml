@@ -1,21 +1,20 @@
-﻿@model GroupSportsWeb.ViewModels.LstWorkWeeksViewModel
+﻿@model GroupSportsWeb.ViewModels.WorkWeeks.LstWorkWeeksViewModel
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Work Weeks";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Work Weeks</h2>
 
 <div class="content-page">
     <!-- Start content -->
     <div class="content">
         <div class="container">
-
             <div class="row">
                 <div class="col-xs-12">
                     <div class="page-title-box">
-                        <h4 class="page-title">Semanas </h4>
+                        <h4 class="page-title">Semanas del Mesociclo @Model.Mesociclo.Name </h4>
                         <ol class="breadcrumb p-0 m-0">
                             <li>
                                 <a href="#">Macrociclos</a>
@@ -41,39 +40,35 @@
                                 <table id="tech-companies-1" class="table  table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Semana</th>
-                                            <th data-priority="1">Objetivo de la semana</th>
+                                            <th data-priority="1">Nombre</th>
+                                            <th data-priority="1">Objetivo</th>
+                                            <th data-priority="1">Fecha de Inicio</th>
+                                            <th data-priority="1">Fecha de Fin</th>
                                             <th data-priority="1">Mesociclo</th>
-                                            <th data-priority="1">Objetivo del Mesociclo</th>
                                             <th>Acciones</th>
-
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach (var item in Model.listaSemanasPorMesociclo)
+                                        @foreach (var item in Model.LstWorkweeks)
                                         {
-
-
                                             <tr>
-                                                <td> @item.weekName</td>
-                                                <td>@item.weekObjective</td>
-                                                <td>@item.mesocicleName</td>
-                                                <td>@item.mesocicleObjective</td>
+                                                <td><a href="@Url.Action("Index","Sessions", new {workweekid = item.WorkWeekId, @class = "on-default edit-row"})">@item.Nombre</a></td>
+                                                <td>@item.Objective</td>
+                                                <td>@item.FechaInicio</td>
+                                                <td>@item.FechaFin</td>
+                                                <td>@item.MESOCICLO.Name</td>
                                                 <td class="actions">
-
-                                                    <a href="~/Disciplines/Edit/@item.mesocicloId" class="hidden on-editing save-row"><i class="fa fa-save"></i></a>
-                                                    <a href="~/Disciplines/Edit/@item.mesocicloId" class="hidden on-editing cancel-row"><i class="fa fa-times"></i></a>
-                                                    <a href="~/Disciplines/Edit/@item.mesocicloId" class="on-default edit-row"><i class="fa fa-pencil"></i></a>
-                                                    <a href="~/Disciplines/Delete/@item.mesocicloId" class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
+                                                    <a href="@Url.Action("AddEditWorkWeek", new {workweekid = item.WorkWeekId, @class = "on-default edit-row"})"><i class="fa fa-pencil"></i></a>
+                                                    <a href="@Url.Action("DeleteWorkWeek", new {workweekid = item.WorkWeekId, @class = "on-default remove-row"})"><i class="fa fa-trash-o"></i></a>
                                                 </td>
-
                                             </tr>
                                         }
                                     </tbody>
                                 </table>
                                 <div class="form-group m-b-0">
                                     <div class="col-sm-offset-3 col-sm-9">
-                                        <button type="button" class="btn btn-info waves-effect waves-light" onclick="location.href = 'Create';">Nuevo</button>
+                                        <a href="@Url.Action("AddEditWorkWeek","WorkWeek",new { @class="btn btn-info waves-effect waves-light"})">Nuevo Work Week</a>
+                                        @*<button type="button" class="btn btn-info waves-effect waves-light" onclick="location.href = 'Create';">Nuevo</button>*@
                                     </div>
                                 </div>
                             </div>
@@ -89,5 +84,8 @@
         2016 - 2017 © Group Sports.
     </footer>
 </div>
+
+
+
 
 

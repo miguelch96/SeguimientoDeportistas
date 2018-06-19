@@ -12,7 +12,7 @@ namespace GroupSports.DL.DALI
         {
             using (GSEntities entities = new GSEntities())
             {
-                return entities.WORKPLAN.ToList();
+                return entities.WORKPLAN.Where(x=>x.Estado).ToList();
             }
         }
 
@@ -54,7 +54,6 @@ namespace GroupSports.DL.DALI
                         workplanInDb.Objective = workplan.Objective;
                         workplanInDb.FechaInicio = workplan.FechaInicio;
                         workplanInDb.FechaFin = workplan.FechaFin;
-
                         entities.SaveChanges();
                     }
                 }

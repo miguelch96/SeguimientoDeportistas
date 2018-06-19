@@ -7,7 +7,7 @@ using GroupSports.DL;
 
 namespace GroupSportsWeb.ViewModels.Macrociclos
 {
-    public class AddEditMacrociclosViewModel
+    public class AddEditMacrocicloViewModel
     {
         public int? MacrocicloId { get; set; }
 
@@ -19,13 +19,13 @@ namespace GroupSportsWeb.ViewModels.Macrociclos
         [Required]
         public string Objective { get; set; } = String.Empty;
 
-        public DateTime FechaInicio { get; set; }
+        public DateTime FechaInicio { get; set; } = DateTime.Today;
 
-        public DateTime FechaFin { get; set; }
-
-        public List<COACH> LstCoachs { get; set; } = new List<COACH>();
+        public DateTime FechaFin { get; set; } = DateTime.Today.AddDays(5);
 
         public bool Estado { get; set; } = true;
+
+        public List<WORKPLAN> LstWorkplans { get; set; } = new List<WORKPLAN>();
 
         public void CargarDatos(MACROCICLO macrociclo)
         {

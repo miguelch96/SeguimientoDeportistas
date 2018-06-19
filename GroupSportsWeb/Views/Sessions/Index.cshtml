@@ -1,10 +1,11 @@
-﻿@model GroupSportsWeb.ViewModels.Macrociclos.LstMacrociclosViewModel
+﻿@model GroupSportsWeb.ViewModels.Sessions.LstSessionsViewModel
+
 @{
-    ViewBag.Title = "Macrociclos";
+    ViewBag.Title = "Work Weeks";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Macrociclos de @Model.Workplan.Name </h2>
+<h2>Sesiones</h2>
 
 <div class="content-page">
     <!-- Start content -->
@@ -13,7 +14,7 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="page-title-box">
-                        <h4 class="page-title">Macrociclos del @Model.Workplan.Name </h4>
+                        <h4 class="page-title">Sesiones de la semana @Model.Workweek.Nombre </h4>
                         <ol class="breadcrumb p-0 m-0">
                             <li>
                                 <a href="#">Macrociclos</a>
@@ -43,22 +44,21 @@
                                             <th data-priority="1">Objetivo</th>
                                             <th data-priority="1">Fecha de Inicio</th>
                                             <th data-priority="1">Fecha de Fin</th>
-                                            <th data-priority="1">Work Plan</th>
+                                            <th data-priority="1">Mesociclo</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach (var item in Model.LstMacrociclos)
+                                        @foreach (var item in Model.LstSessions)
                                         {
                                             <tr>
-                                                <td><a href="@Url.Action("Index","Mesociclos", new {macrocicloid = item.MacrocicloId, @class = "on-default edit-row"})">@item.Name</a></td>
+                                                <td>@item.Nombre</td>
                                                 <td>@item.Objective</td>
-                                                <td>@item.FechaInicio</td>
-                                                <td>@item.FechaFin</td>
-                                                <td>@Model.Workplan.Name</td>
+                                                <td>@item.RegisterDate</td>
+                                                <td>@item.WORKWEEK.Nombre</td>
                                                 <td class="actions">
-                                                    <a href="@Url.Action("AddEditMacrociclo", new {macrocicloId = item.MacrocicloId, @class = "on-default edit-row"})"><i class="fa fa-pencil"></i></a>
-                                                    <a href="@Url.Action("DeleteMacrocilo", new {macrocicloId = item.MacrocicloId, @class = "on-default remove-row"})"><i class="fa fa-trash-o"></i></a>
+                                                    <a href="@Url.Action("AddEditSession", new {sessionid = item.SesionId, @class = "on-default edit-row"})"><i class="fa fa-pencil"></i></a>
+                                                    <a href="@Url.Action("DeleteSession", new {sessionid = item.SesionId, @class = "on-default remove-row"})"><i class="fa fa-trash-o"></i></a>
                                                 </td>
                                             </tr>
                                         }
@@ -66,7 +66,7 @@
                                 </table>
                                 <div class="form-group m-b-0">
                                     <div class="col-sm-offset-3 col-sm-9">
-                                        <a href="@Url.Action("AddEditMacrociclo","Macrociclos",new { @class="btn btn-info waves-effect waves-light"})">Nuevo Macrociclo</a>
+                                        <a href="@Url.Action("AddEditSession","Sessions",new { @class="btn btn-info waves-effect waves-light"})">Nueva sesion</a>
                                         @*<button type="button" class="btn btn-info waves-effect waves-light" onclick="location.href = 'Create';">Nuevo</button>*@
                                     </div>
                                 </div>
@@ -83,7 +83,3 @@
         2016 - 2017 © Group Sports.
     </footer>
 </div>
-
-
-
-

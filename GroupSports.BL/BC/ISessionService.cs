@@ -3,17 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GroupSports.DL.Actors;
+using GroupSports.DL;
 
-namespace GroupSports.DL.DALI
+namespace GroupSports.BL.BC
 {
-    public interface ISessionRepository
+    public interface ISessionService
     {
         List<SESION> Get(int? workweekid);
         SESION Find(int id);
-        void Add(SESION mesociclo);
-        void Edit(SESION mesociclo);
+        void Add(SESION sesion);
+        void Edit(SESION sesion);
         void Delete(int id);
-
     }
 }
